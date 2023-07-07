@@ -14,7 +14,7 @@ class FoodCountType extends AbstractType
         $builder
             ->add('amount')
             ->add('product')
-            ->add('entry')
+            // ->add('entry')
         ;
     }
 

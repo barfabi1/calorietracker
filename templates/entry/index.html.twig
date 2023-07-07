@@ -11,9 +11,16 @@
 <a href="{{ path('app_entry_new') }}" class="btn btn-success"><i class="bi bi-clipboard-plus"></i> Dodaj wpis</a>
 {% for entry in entries %}
 <div class="card mt-3">
-   <div class="card-header">{{ entry.name }} {{ entry.date ? entry.date|date('d.m.Y') : '' }} {#{{ entry.user.email }}#}</div>
+   <div class="card-header d-flex align-items-center justify-content-between">
+        <div><b>{{ entry.name }}</b> {{ entry.date ? entry.date|date('d.m.Y') : '' }}</div>
+        <div>
+            <form method="post" action="{{ path('app_entry_delete', {'id': entry.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entry.id) }}">
+        <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i>Usuń wpis</button>
+    </form>   
+        </div> 
+   </div>
    <div class="card-body">
-      <h5 class="card-title">Produkty</h5>
       {% if entry.foodCount %}
             <table class="table table-bordered">
                 <tbody>
@@ -32,7 +39,10 @@
                 </tbody>
             </table>
       {% endif %}
+      <div class="btn-group">
       <a href="{{ path('app_food_count_new', {'entry': entry.id}) }}" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Dodaj produkt</a>
+      </div>
+
    </div>
 </div>
 {% else %}
@@ -40,39 +50,6 @@
 {% endfor %}
 
 <hr/>
-    {# <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entry in entries %}
-            <tr>
-                <td>{{ entry.id }}</td>
-                <td>{{ entry.name }}</td>
-                <td>{{ entry.date ? entry.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ entry.createdAt ? entry.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_entry_show', {'id': entry.id}) }}">show</a>
-                    <a href="{{ path('app_entry_edit', {'id': entry.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_entry_new') }}">Create new</a> #}
 
 </div>
 {% endblock %}

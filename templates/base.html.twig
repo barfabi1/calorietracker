@@ -31,9 +31,6 @@
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ path('app_entry_index') }}">Moje wpisy</a>
             </li>       
-            {# <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('app_food_count_index') }}">Posiłki</a>
-            </li>                    #}
             {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ path('app_user_index') }}">Użytkownicy</a>
@@ -41,22 +38,13 @@
             {% endif %}
 
         </ul>
-        <form class="d-flex">
-            {# <a class="btn btn-outline-success" href="{{ path('app_login') }}" role="button">Logowanie</a> #}
+        <form class="d-flex">    
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <p>Witaj {{ app.user.email }}</p>
-            {% endif %}            
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="btn btn-outline-danger" href="{{ path('app_logout') }}" role="button">Wyloguj</a>
+                <a class="btn btn-danger" href="{{ path('app_logout') }}" role="button">Wyloguj</a>
             {% else %}    
             <a class="btn btn-outline-success" href="{{ path('app_login') }}" role="button">Logowanie</a>
             <a class="btn btn-outline" href="{{ path('app_register') }}" role="button">Rejestracja</a>
             {% endif %}            
-            {# <a class="btn btn-outline-danger" href="{{ path('app_logout') }}" role="button">Wyloguj</a> #}
-            {# <a class="btn btn-outline" href="{{ path('app_register') }}" role="button">Rejestracja</a> #}
-
-            {# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
-            
         </form>
         </div>
     </div>

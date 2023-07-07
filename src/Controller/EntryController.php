@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\Entry;
+use App\Entity\FoodCount;
 use App\Form\EntryType;
 use App\Repository\EntryRepository;
+use App\Repository\FoodCountRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -72,9 +74,13 @@ class EntryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_entry_delete', methods: ['POST'])]
-    public function delete(Request $request, Entry $entry, EntryRepository $entryRepository): Response
+    public function delete(Request $request, Entry $entry, EntryRepository $entryRepository, FoodCountRepository $foodCountRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$entry->getId(), $request->request->get('_token'))) {
+            $foodCounts = $foodCountRepository->findBy(['entry' => $entry]);
+            foreach ($foodCounts as $item) {
+                $foodCountRepository->remove($item, true);
+            }
             $entryRepository->remove($entry, true);
         }
 

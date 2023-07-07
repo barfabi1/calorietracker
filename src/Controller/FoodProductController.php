@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FoodProduct;
 use App\Form\FoodProductType;
+use App\Repository\FoodCountRepository;
 use App\Repository\FoodProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,9 +69,13 @@ class FoodProductController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_food_product_delete', methods: ['POST'])]
-    public function delete(Request $request, FoodProduct $foodProduct, FoodProductRepository $foodProductRepository): Response
+    public function delete(Request $request, FoodProduct $foodProduct, FoodProductRepository $foodProductRepository, FoodCountRepository $foodCountRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$foodProduct->getId(), $request->request->get('_token'))) {
+            $foodCounts = $foodCountRepository->findBy(['product' => $foodProduct]);
+            foreach ($foodCounts as $item) {
+                $foodCountRepository->remove($item, true);
+            }
             $foodProductRepository->remove($foodProduct, true);
         }
 
