@@ -29,9 +29,9 @@
                     <td>{{ item.product.name }}</td>
                     <td>{{ item.amount }}g</td>
                     <td>{{(item.product.energy * (item.amount / 100))}}kcal</td>
-                    <td>{{(item.product.protein * (item.amount / 100))}}[g] Białko</td>
-                    <td>{{(item.product.fat * (item.amount / 100))}}[g] Tłuszcz</td>
-                    <td>{{(item.product.carbohydrates * (item.amount / 100))}}[g] Węglowodany</td>                    
+                    <td>{{(item.product.protein * (item.amount / 100))}}g białka</td>
+                    <td>{{(item.product.fat * (item.amount / 100))}}g tłuszczu</td>
+                    <td>{{(item.product.carbohydrates * (item.amount / 100))}}g węglowodanów</td>                    
                 </tr>
                 {% else %}
                 <p>Brak produktów. Dodaj pierwszy produkt</p>

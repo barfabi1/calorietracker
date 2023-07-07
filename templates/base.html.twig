@@ -42,8 +42,8 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a class="btn btn-danger" href="{{ path('app_logout') }}" role="button">Wyloguj</a>
             {% else %}    
-            <a class="btn btn-outline-success" href="{{ path('app_login') }}" role="button">Logowanie</a>
-            <a class="btn btn-outline" href="{{ path('app_register') }}" role="button">Rejestracja</a>
+            <a class="btn btn-warning" href="{{ path('app_login') }}" role="button">Logowanie</a>&nbsp;
+            <a class="btn btn-secondary" href="{{ path('app_register') }}" role="button">Rejestracja</a>
             {% endif %}            
         </form>
         </div>

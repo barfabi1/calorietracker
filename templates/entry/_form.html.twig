@@ -1,14 +1,6 @@
-{# {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }} #}
-
-
-
 {{ form_start(form) }}
     <div class="form-group">
         {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
     </div> 
-    <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Dodaj wpis') }}</button>
-{# {{ form_end(form, {'render_rest': false}) }} #}
+    <button class="btn {{ button_color|default('btn-primary') }}  mt-3">{{ button_label|default('Dodaj wpis') }}</button>
 {{ form_end(form) }}

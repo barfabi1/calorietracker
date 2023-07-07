@@ -10,7 +10,12 @@
     Zarejestrowane konto nie wymaga uwierzytelniania przez e-mail i jest od razu dostępne po jego utworzeniu w serwisie.
     </div>
 
-    {{ form_errors(registrationForm) }}
+
+    {% if form_errors(registrationForm) %}
+    <div class="alert alert-danger" role="alert">
+    {{ form_errors(registrationForm) }}    
+    </div>
+    {% endif %}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
@@ -19,7 +24,8 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn-success">Register</button>
     {{ form_end(registrationForm) }}
+    
 </div>    
 {% endblock %}
