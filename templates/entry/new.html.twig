@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Entry{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Dodaj nowy wpis</h1>
+
+    {{ include('entry/_form.html.twig') }}
+
+    <a href="{{ path('app_entry_index') }}">wróć do wpisów</a>
+</div>
+{% endblock %}

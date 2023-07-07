@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FoodCount{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2 class="text-center mt-5 mb-3">Dodaj posiłek</h2>
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-info float-right" href="{{ path('app_entry_index') }}"> 
+                Wróć do wpisów
+            </a>
+        </div>
+        <div class="card-body">
+            {{ include('food_count/_form.html.twig') }}
+        </div>        
+    </div>
+</div>    
+{% endblock %}

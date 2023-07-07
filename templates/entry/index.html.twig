@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entry index{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1>Wpisy użytkownika {{ app.user.email }}</h1>
+<hr/>
+
+<a href="{{ path('app_entry_new') }}" class="btn btn-success"><i class="bi bi-clipboard-plus"></i> Dodaj wpis</a>
+{% for entry in entries %}
+<div class="card mt-3">
+   <div class="card-header">{{ entry.name }} {{ entry.date ? entry.date|date('d.m.Y') : '' }} {#{{ entry.user.email }}#}</div>
+   <div class="card-body">
+      <h5 class="card-title">Produkty</h5>
+      {% if entry.foodCount %}
+            <table class="table table-bordered">
+                <tbody>
+                {% for item in entry.foodCount %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.amount }}g</td>
+                    <td>{{(item.product.energy * (item.amount / 100))}}kcal</td>
+                    <td>{{(item.product.protein * (item.amount / 100))}}[g] Białko</td>
+                    <td>{{(item.product.fat * (item.amount / 100))}}[g] Tłuszcz</td>
+                    <td>{{(item.product.carbohydrates * (item.amount / 100))}}[g] Węglowodany</td>                    
+                </tr>
+                {% else %}
+                <p>Brak produktów. Dodaj pierwszy produkt</p>
+                {% endfor %}      
+                </tbody>
+            </table>
+      {% endif %}
+      <a href="{{ path('app_food_count_new', {'entry': entry.id}) }}" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Dodaj produkt</a>
+   </div>
+</div>
+{% else %}
+<p>Nie znaleziono wpisów. Dodaj pierwszy wpis</p>
+{% endfor %}
+
+<hr/>
+    {# <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.id }}</td>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.date ? entry.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ entry.createdAt ? entry.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_entry_show', {'id': entry.id}) }}">show</a>
+                    <a href="{{ path('app_entry_edit', {'id': entry.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_entry_new') }}">Create new</a> #}
+
+</div>
+{% endblock %}

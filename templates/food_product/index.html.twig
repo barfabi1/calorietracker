@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+  
+{% block title %}Food products list index{% endblock %}
+  
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Produkty żywieniowe</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-primary" href="{{ path('app_food_product_new') }}"> 
+                    Dodaj nowy produkt 
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>kcal/100g</th>
+                        <th>Białko</th>
+                        <th>Węglowodany</th>
+                        <th>Tłuszcz</th>
+                        <th>Błonnik</th>
+                        <th>Utworzono</th>
+                        <th>Zmieniono</th>
+                        <th width="240px"></th>              
+                    </tr>
+                    {% for food_product in food_products %}
+                    <tr>
+                        <td>{{ food_product.id }}</td>
+                        <td>{{ food_product.name }}</td>
+                        <td>{{ food_product.energy }}</td>
+                        <td>{{ food_product.protein }}</td>
+                        <td>{{ food_product.carbohydrates }}</td>
+                        <td>{{ food_product.fat }}</td>
+                        <td>{{ food_product.fiber }}</td>
+                        <td>{{ food_product.createdAt ? food_product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ food_product.updatedAt ? food_product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_food_product_delete', {'id': food_product.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info"
+                                    href="{{ path('app_food_product_show', {'id': food_product.id}) }}">
+                                    Wyświetl
+                                </a>
+                                <a
+                                    class="btn btn-outline-success"
+                                    href="{{ path('app_food_product_edit', {'id': food_product.id}) }}">
+                                    Edytuj
+                                </a>
+  
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ food_product.id) }}">
+                                <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+  
+{% endblock %}

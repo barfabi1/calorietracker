@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FoodCount index{% endblock %}
+
+{% block body %}
+    <h1>Wszystkie posiłki</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ilość [g]</th>
+                <th>Produkt</th>
+                <th></th>
+                <th>Energia [kcal]</th>
+                <th>Białko</th>
+                <th>Tłuszcze</th>
+                <th>Węglowodany</th>                
+            </tr>
+        </thead>
+        <tbody>
+        {% for food_count in food_counts %}
+            <tr>
+                <td>{{ food_count.id }}</td>
+                <td>{{ food_count.amount }}</td>
+                <td>{{ food_count.product.name }}</td>
+                <td>
+                    <a href="{{ path('app_food_count_show', {'id': food_count.id}) }}">show</a>
+                    <a href="{{ path('app_food_count_edit', {'id': food_count.id}) }}">edit</a>
+                </td>
+                <td>{{(food_count.product.energy * (food_count.amount / 100))}}</td>
+                <td>{{(food_count.product.protein * (food_count.amount / 100))}}</td>
+                <td>{{(food_count.product.fat * (food_count.amount / 100))}}</td>
+                <td>{{(food_count.product.carbohydrates * (food_count.amount / 100))}}</td>                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_food_count_new') }}">Create new</a>
+{% endblock %}

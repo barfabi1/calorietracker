@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+  
+{% block title %}Food product{% endblock %}
+  
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">{{ food_product.name }} [{{ food_product.id }}] </h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_food_product_index') }}"> 
+                    Wszystkie produkty
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Id:</b>
+                <p>{{ food_product.id }}</p>
+                <b class="text-muted">Nazwa:</b>
+                <p>{{ food_product.name }}</p>
+                <b class="text-muted">kcal/100g</b>
+                <p>{{ food_product.energy }}</p>
+                <b class="text-muted">Białko:</b>
+                <p>{{ food_product.protein }}</p>
+                <b class="text-muted">Węglowodany</b>
+                <p>{{ food_product.carbohydrates }}</p>
+                <b class="text-muted">Tłuszcz</b>
+                <p>{{ food_product.fat }}</p>
+                <b class="text-muted">Błonnik</b>
+                <p>{{ food_product.fiber }}</p>
+                <b class="text-muted">Utworzono</b>
+                <p>{{ food_product.createdAt ? food_product.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+                <b class="text-muted">Zmieniono</b>
+                <p>{{ food_product.updatedAt ? food_product.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+

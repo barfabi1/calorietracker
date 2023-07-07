@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Rejestracja</h2>
+
+    <div class="alert alert-warning" role="alert">
+    Zarejestrowane konto nie wymaga uwierzytelniania przez e-mail i jest od razu dostępne po jego utworzeniu w serwisie.
+    </div>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+</div>    
+{% endblock %}
